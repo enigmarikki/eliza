@@ -13,7 +13,7 @@ import { TwitterClientInterface } from "@elizaos/client-twitter";
 // import { ReclaimAdapter } from "@elizaos/plugin-reclaim";
 import { DirectClient } from "@elizaos/client-direct";
 import { PrimusAdapter } from "@elizaos/plugin-primus";
-
+import {injectivePlugin } from "@elizaos/plugin-injective";
 import {
     AgentRuntime,
     CacheManager,
@@ -752,6 +752,10 @@ export async function createAgent(
                 : null,
             getSecret(character, "COINBASE_COMMERCE_KEY")
                 ? coinbaseCommercePlugin
+                : null,
+            ((getSecret(character, "EVM_PUBLIC_KEY") || getSecret(character, "INJECTIVE_PUBLIC_KEY")) &&
+                getSecret(character, "INJECTIVE_PRIVATE_KEY"))
+                ? injectivePlugin
                 : null,
             getSecret(character, "FAL_API_KEY") ||
             getSecret(character, "OPENAI_API_KEY") ||
