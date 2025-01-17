@@ -22,6 +22,7 @@
         "docker": "pnpm docker:build && pnpm docker:run && pnpm docker:bash",
         "test": "bash ./scripts/test.sh",
         "smokeTests": "bash ./scripts/smokeTests.sh",
+	"docker:lint": "docker build -t Dockerfile-lint . && docker run --rm -v \"$PWD\":/app node23-linter",
         "integrationTests": "bash ./scripts/integrationTests.sh"
     },
     "devDependencies": {
